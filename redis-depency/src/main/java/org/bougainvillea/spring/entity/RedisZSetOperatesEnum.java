@@ -1,6 +1,9 @@
-package org.bougainvillea.spring.redisdepency.utils;
+package org.bougainvillea.spring.entity;
 
-public enum RedisOperates {
+/**
+ * redis 执行器类型
+ */
+public enum RedisZSetOperatesEnum {
     REDIS_KEYS_OPERATE,
     REDIS_STRING_OPERATE,
     REDIS_HASH_OPERATE,

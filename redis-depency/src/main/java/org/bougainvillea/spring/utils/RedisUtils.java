@@ -1,6 +1,7 @@
-package org.bougainvillea.spring.redisdepency.utils;
+package org.bougainvillea.spring.utils;
 
-import org.bougainvillea.spring.redisdepency.utils.executor.RedisExecutor;
+import org.bougainvillea.spring.entity.RedisOperateData;
+import org.bougainvillea.spring.utils.executor.RedisExecutor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.*;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class RedisUtils {
     private RedisExecutor redisHashExecutor;
     private RedisExecutor redisSetExecutor;
     private RedisExecutor redisZSetExecutor;
-    private RedisExecutor redisKeysExecutor;
+
 
     @Autowired
     public RedisUtils(RedisTemplate<String, Object> redisTemplate,
@@ -28,8 +29,7 @@ public class RedisUtils {
                       RedisExecutor redisListExecutor,
                       RedisExecutor redisHashExecutor,
                       RedisExecutor redisSetExecutor,
-                      RedisExecutor redisZSetExecutor,
-                      RedisExecutor redisKeysExecutor
+                      RedisExecutor redisZSetExecutor
                         ) {
         Assert.notNull(redisTemplate,"redisTemplate must be not null");
         this.redisTemplate = redisTemplate;
@@ -43,15 +43,13 @@ public class RedisUtils {
         this.redisSetExecutor = redisSetExecutor;
         Assert.notNull(redisZSetExecutor,"redisZSetExecutor must be not null");
         this.redisZSetExecutor = redisZSetExecutor;
-        Assert.notNull(redisKeysExecutor,"redisKeysExecutor must be not null");
-        this.redisKeysExecutor = redisKeysExecutor;
-        //设置责任链
+
+        //初始化责任链
         redisStringExecutor.setNextExecutor(redisListExecutor);
         redisListExecutor.setNextExecutor(redisHashExecutor);
         redisHashExecutor.setNextExecutor(redisSetExecutor);
         redisSetExecutor.setNextExecutor(redisZSetExecutor);
-        redisZSetExecutor.setNextExecutor(redisKeysExecutor);
-        redisKeysExecutor.setNextExecutor(redisStringExecutor);
+        redisZSetExecutor.setNextExecutor(redisStringExecutor);
     }
 
     /**
@@ -59,7 +57,7 @@ public class RedisUtils {
      *
      */
     public boolean set(RedisOperateData operateData){
-        redisKeysExecutor.writeRequest(operateData);
+        redisZSetExecutor.writeRequest(operateData);
         return true;
     }
 
@@ -67,7 +65,7 @@ public class RedisUtils {
      * 读取缓存
      *
      */
-    public RedisOperateData get(RedisOperateData operateData) {
+    public Object get(RedisOperateData operateData) {
         return redisStringExecutor.readRequest(operateData);
     }
 

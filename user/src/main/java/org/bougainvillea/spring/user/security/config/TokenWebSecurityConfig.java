@@ -1,7 +1,7 @@
 package org.bougainvillea.spring.user.security.config;
 
 
-import org.bougainvillea.spring.redisdepency.utils.RedisUtils;
+import org.bougainvillea.spring.utils.RedisUtils;
 import org.bougainvillea.spring.user.security.filter.TokenAuthenticationFilter;
 import org.bougainvillea.spring.user.security.filter.TokenLoginFilter;
 import org.bougainvillea.spring.user.security.secu.*;

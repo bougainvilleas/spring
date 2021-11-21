@@ -39,7 +39,7 @@ curl -H 'token:eyJhbGciOiJIUzI1NiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSSk
 
 
 curl -H 'Content-Type:application/json' -X POST -d '{"username":"caddy","password":"123"}'  http://127.0.0.1:20000/login
-curl -H 'token:eyJhbGciOiJIUzI1NiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSSk5MSalU0lFKrShQsjI0MzQ3MTM1NDOpBQCOmuwYIAAAAA.MtxKCYwNVdWGjAXRv1DFSCAJ79j8Zp8VcApGG3OwaVk' -X GET  http://127.0.0.1:20000/index/info
+curl -H 'token:eyJhbGciOiJIUzI1NiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSSk5MSalU0lFKrShQsjI0MzQ3tzQzNTOrBQDDvaYiIAAAAA.QvEjnMd-PEHSgfN-SqccgYHL5vlDNZ7SOn-xSnB3nhU' -X GET  http://127.0.0.1:20000/index/info
 curl -H 'token:eyJhbGciOiJIUzI1NiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSSk5MSalU0lFKrShQsjI0MzQ3MTM1NDOpBQCOmuwYIAAAAA.MtxKCYwNVdWGjAXRv1DFSCAJ79j8Zp8VcApGG3OwaVk' -X GET  http://127.0.0.1:20000/index/menu
 ```
 

@@ -3,8 +3,8 @@ package org.bougainvillea.spring.user.security.filter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.bougainvillea.spring.commons.entity.User;
 import org.bougainvillea.spring.commons.utils.Result;
-import org.bougainvillea.spring.redisdepency.utils.RedisOperateData;
-import org.bougainvillea.spring.redisdepency.utils.RedisUtils;
+import org.bougainvillea.spring.entity.RedisOperateData;
+import org.bougainvillea.spring.utils.RedisUtils;
 import org.bougainvillea.spring.user.security.entity.SecuUser;
 import org.bougainvillea.spring.user.security.secu.TokenManager;
 import org.bougainvillea.spring.user.security.utils.ResponseUtil;
@@ -107,7 +107,7 @@ public class TokenLoginFilter extends UsernamePasswordAuthenticationFilter {
         //根据用户名生成token
         String token = tokenManager.createToken(username);
         //可以存到缓存中，redis
-        redisUtils.set(RedisOperateData.builder().object(token).key(username).build());
+        redisUtils.set(RedisOperateData.builder().value(token).key(username).build());
         //...
         //返回token
         ResponseUtil.out(response,
