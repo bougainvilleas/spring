@@ -1,20 +1,14 @@
 package org.bougainvilleas.spring.web;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Component;
-import springfox.documentation.service.Contact;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import springfox.documentation.service.Contact;
 
 /**
  * @author renqiankun
  * 2022-03-04 17:26:53 星期五
  */
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-//@Component
 @ConfigurationProperties(prefix = "swagger")
 public class SwaggerInfo
 {

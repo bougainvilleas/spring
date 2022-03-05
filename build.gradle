@@ -78,8 +78,6 @@ subprojects {
         testCompileOnly "org.projectlombok:lombok:${LombokVersion}"
 
 
-
-
         annotationProcessor "org.projectlombok:lombok:${LombokVersion}"
         testAnnotationProcessor "org.projectlombok:lombok:${LombokVersion}"
     }

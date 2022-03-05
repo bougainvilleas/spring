@@ -1,5 +1,6 @@
 package org.bougainvillea.spring.user.config;
 
+import org.bougainvilleas.spring.web.SwaggerConfig;
 import org.bougainvilleas.spring.web.SwaggerInfo;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,12 +19,12 @@ import springfox.documentation.spring.web.plugins.Docket;
 public class MySwaggerConfig
 {
 
-    SwaggerInfo swaggerInfo;
+    SwaggerConfig swaggerConfig;
 
-    public MySwaggerConfig(SwaggerInfo swaggerInfo)
+    public MySwaggerConfig(SwaggerConfig swaggerConfig)
     {
-        Assert.notNull(swaggerInfo, "SwaggerInfo must be not null");
-        this.swaggerInfo = swaggerInfo;
+        Assert.notNull(swaggerConfig, "SwaggerConfig must be not null");
+        this.swaggerConfig = swaggerConfig;
     }
 
     private ApiInfo userApiInfo()
@@ -31,11 +32,11 @@ public class MySwaggerConfig
         return new ApiInfoBuilder()
                 .title("user center")
                 .description("用户中心")
-                .contact(swaggerInfo.getContact())
+                .contact(swaggerConfig.getSwaggerInfo().getContact())
                 .version("0.0.3")
-                .termsOfServiceUrl(swaggerInfo.getServiceUrl())
-                .license(swaggerInfo.getLicense())
-                .licenseUrl(swaggerInfo.getLicenseUrl())
+                .termsOfServiceUrl(swaggerConfig.getSwaggerInfo().getServiceUrl())
+                .license(swaggerConfig.getSwaggerInfo().getLicense())
+                .licenseUrl(swaggerConfig.getSwaggerInfo().getLicenseUrl())
                 .build();
     }
 

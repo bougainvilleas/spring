@@ -1,7 +1,7 @@
 package org.bougainvilleas.spring.web;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.Assert;
@@ -19,11 +19,12 @@ import java.util.Collections;
  * 2022-03-04 16:03:46 星期五
  */
 @Configuration
+@EnableConfigurationProperties(SwaggerInfo.class)
 @EnableOpenApi
 public class SwaggerConfig
 {
 
-    SwaggerInfo swaggerInfo;
+    private final SwaggerInfo swaggerInfo;
 
     public SwaggerConfig(SwaggerInfo swaggerInfo)
     {
@@ -36,6 +37,10 @@ public class SwaggerConfig
      */
     public String getBasePackage() {
         return swaggerInfo.getBasePackage();
+    }
+
+    public SwaggerInfo getSwaggerInfo() {
+        return swaggerInfo;
     }
 
     @Bean
