@@ -160,7 +160,7 @@ public class RedisStringExecutor extends RedisExecutor {
     public Long size(String key){
         return null;
     }
-    public List multiGet(Collection keys){
+    public <T> List<T> multiGet(Collection<T> keys){
         return null;
     }
     public boolean setBit(String key, long offset, boolean value){

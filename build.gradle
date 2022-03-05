@@ -1,116 +1,103 @@
 buildscript {
     ext {
-        // 定义变量
-        springCloudVersion = '2021.0.1'
-        springBootVersion = '2.6.4'
-        depManVersion = '1.0.11.RELEASE'
-        asciidoctor = '1.5.8'
-    }
+        set('projectVersion', "0.0.3")
 
-    repositories {
-        //优先使用maven本地仓库
-        mavenLocal()
-        mavenCentral()
-    }
+        set('LombokVersion', "1.18.20")
+        set('junitVersion', "5.8.1")
 
-    dependencies {
-        //用来 打包
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        set('springCloudVersion', "2021.0.1")
+        set('springBootVersion', "2.6.4")
+        set('springManageVersion', "1.0.11.RELEASE")
+
+//        set('asciidoctor', "1.5.8")
+//        set('snippetsDir', file("build/generated-snippets"))
     }
 }
 
-plugins{
-    id 'java'
-    /**
-     * api() 方法需要引入java-library
-     * api=compile 依赖可以传递 compile说是要抛弃
-     * implementation 依赖不能传递给下一层
-     */
-    id 'java-library'
-    /**
-     * org.springframework.boot
-     * 默认打包 bootJar.enabled = true
-     *         jar.enabled = false
-     * bootJar会搜索springboot的main方法，build找不到会报错
-     */
+plugins {
     id 'org.springframework.boot' version "${springBootVersion}" apply false
-    id 'io.spring.dependency-management' version "${depManVersion}" apply false
-    id 'org.asciidoctor.convert' version "${asciidoctor}" apply false
+    id 'io.spring.dependency-management' version "${springManageVersion}" apply false
+//    id 'org.asciidoctor.convert' version "${asciidoctor}" apply false
 }
-
-/**
- *  非jar包运行可以禁用jar
- *  springboot 默认使用bootJar 打jar包（jar默认禁用），bootJar会搜索main 方法 找不到会报错
- *  所以非springboot模块不要依赖springboot
- *  比如父项目设置 apply false： id 'org.springframework.boot' version "${springBootVersion}" apply false
- */
-
-jar.enabled = false
 
 allprojects {
     apply plugin: 'java'
-    apply plugin: 'java-library'
 
-    group = 'org.bougainvillea.spring'
-    version = '0.0.1-SNAPSHOT'
-    //全局java版本
-    sourceCompatibility = '1.8'
-    targetCompatibility = '1.8'
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(8)
+        }
+    }
 
-    compileTestJava.enabled = true
-    processTestResources.enabled = true
-    testClasses.enabled = true
-    test.enabled = false
-
-    //指定编码格式
     tasks.withType(JavaCompile) {
+        //启用所有警告信息 -Xlint:all 关闭 -Xlint:none
+        options.compilerArgs << '-Xlint:all'
         options.encoding = "UTF-8"
     }
-    [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
 
-    repositories {
-        //优先使用maven本地仓库
-        mavenLocal()
-        mavenCentral()
+    tasks.withType(Javadoc) {
+        options.encoding = "UTF-8"
     }
 
-}
-// 子项目的公共配置及插件
-subprojects {
-
-    apply plugin: 'io.spring.dependency-management'
-    apply plugin: 'org.springframework.boot'
-    apply plugin: 'org.asciidoctor.convert'
-
-    dependencies {
-        compileOnlyApi 'org.projectlombok:lombok'
-
-        testImplementation("org.springframework.boot:spring-boot-starter-test") {
-            exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-        }
-
-        annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-        annotationProcessor 'org.projectlombok:lombok'
-        testAnnotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-        testAnnotationProcessor 'org.projectlombok:lombok'
-    }
-    configurations {
-        compileOnly {
-            extendsFrom annotationProcessor
-        }
-    }
-
-    ext {
-        set('snippetsDir', file("build/generated-snippets"))
-    }
-    test {
-        outputs.dir snippetsDir
+    tasks.named('test') {
         useJUnitPlatform()
     }
 
-    asciidoctor {
-        inputs.dir snippetsDir
-        dependsOn test
+    repositories {
+        mavenLocal()
+        maven {
+            url 'https://maven.aliyun.com/repository/public/'
+        }
+        mavenCentral()
     }
 
+    compileTestJava.enabled(true)
+    processTestResources.enabled(true)
+    testClasses.enabled(true)
+    jar.enabled(false)
+    test.enabled(false)
+
+}
+
+subprojects {
+    apply plugin: 'java-library'
+//    apply plugin: 'org.asciidoctor.convert'
+
+    group = 'org.bougainvillea.spring'
+    version = "${projectVersion}" as Object
+
+
+    dependencies {
+        //junit test
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
+        testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+
+
+        compileOnly "org.projectlombok:lombok:${LombokVersion}"
+        testCompileOnly "org.projectlombok:lombok:${LombokVersion}"
+
+
+
+
+        annotationProcessor "org.projectlombok:lombok:${LombokVersion}"
+        testAnnotationProcessor "org.projectlombok:lombok:${LombokVersion}"
+    }
+
+//    configurations {
+//        compileOnly {
+//            extendsFrom annotationProcessor
+//        }
+//    }
+
+
+//    test {
+//        outputs.dir snippetsDir
+//        useJUnitPlatform()
+//    }
+
+//    asciidoctor {
+//        inputs.dir snippetsDir
+//        dependsOn test
+//    }
 }

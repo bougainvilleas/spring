@@ -14,6 +14,8 @@ import java.util.List;
 @Data
 public class SecuUser implements UserDetails {
 
+    private static final long serialVersionUID=1L;
+
     //当前登陆用户
     private transient User currentUserInfo;
     //当前权限
