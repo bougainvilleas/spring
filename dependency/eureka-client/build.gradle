@@ -1,0 +1,27 @@
+plugins{
+    id 'io.spring.dependency-management'
+    id 'org.springframework.boot'
+    id 'maven-publish'
+}
+
+jar.enabled(true)
+bootJar.enabled(false)
+
+dependencies {
+    implementation("org.bougainvillea.spring:spring-depency:${projectVersion}")
+    api 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+}
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
+//    发布 jar 到 maven 本地仓库
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+        }
+    }
+}

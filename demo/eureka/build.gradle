@@ -1,0 +1,18 @@
+plugins{
+    id 'io.spring.dependency-management'
+    id 'org.springframework.boot'
+}
+
+dependencies {
+    implementation("org.bougainvillea.spring:spring-depency:${projectVersion}")
+    implementation("org.bougainvillea.spring:eureka-client:${projectVersion}")
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.cloud:spring-cloud-netflix-eureka-server'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+

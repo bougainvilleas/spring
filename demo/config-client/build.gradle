@@ -1,0 +1,18 @@
+plugins{
+    id 'io.spring.dependency-management'
+    id 'org.springframework.boot'
+}
+ext {
+    set('webName', 'undertow') // 'tomcat' 'jetty' 'undertow'
+}
+dependencies {
+    implementation("org.bougainvillea.spring:eureka-client:${projectVersion}")
+    implementation("org.bougainvillea.spring:spring-web:${webName}.${springBootVersion}")
+    api("org.springframework.cloud:spring-cloud-starter-config")
+
+}
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
