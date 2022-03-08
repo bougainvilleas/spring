@@ -9,12 +9,12 @@ ext {
 
 dependencies {
 
-    implementation("org.bougainvillea.spring:commons:${projectVersion}")
-    implementation("org.bougainvillea.spring:spring-depency:${projectVersion}")
-    implementation("org.bougainvillea.spring:eureka-client:${projectVersion}")
-    implementation("org.bougainvillea.spring:spring-web:${webName}.${springBootVersion}")
-    implementation("org.bougainvillea.spring:database-depency:${projectVersion}")
-    implementation("org.bougainvillea.spring:redis-depency:${projectVersion}")
+    implementation("org.bougainvilleas.spring:commons:${projectVersion}")
+    implementation("org.bougainvilleas.spring:spring-depency:${projectVersion}")
+    implementation("org.bougainvilleas.spring:eureka-client:${projectVersion}")
+    implementation("org.bougainvilleas.spring:spring-web:${webName}.${springBootVersion}")
+    implementation("org.bougainvilleas.spring:database-depency:${projectVersion}")
+    implementation("org.bougainvilleas.spring:redis-depency:${projectVersion}")
     api 'org.springframework.boot:spring-boot-starter-security'
     testImplementation 'org.springframework.security:spring-security-test'
 }

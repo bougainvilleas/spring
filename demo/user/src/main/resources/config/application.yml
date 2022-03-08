@@ -2,7 +2,7 @@ spring:
   application:
     name: user
   profiles:
-    active: ${PROFILES_ACTIVE:dev},database,swagger,ec,redis
+    active: database,docs,ec,redis,${PROFILES_ACTIVE:dev}
   main:
     banner-mode: log
   lifecycle:
