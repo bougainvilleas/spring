@@ -24,6 +24,7 @@ spring:
           username: ${GIT_USER}
           password: ${GIT_PASSWORD}
           refresh-rate: 10 #10 seconds 刷新一次配置
+          default-label: master # github 默认为 main
   rabbitmq:
     host: ${RABBITMQ_HOST}
     port: ${RABBITMQ_PORT}
