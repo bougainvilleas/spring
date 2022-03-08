@@ -3,8 +3,8 @@ plugins {
     id 'org.springframework.boot'
 }
 dependencies {
-    implementation("org.bougainvillea.spring:spring-depency:${projectVersion}")
-    implementation("org.bougainvillea.spring:eureka-client:${projectVersion}")
+    implementation("org.bougainvilleas.spring:spring-depency:${projectVersion}")
+    implementation("org.bougainvilleas.spring:eureka-client:${projectVersion}")
     implementation 'org.springframework.cloud:spring-cloud-starter-gateway'
 }
 dependencyManagement {

@@ -4,7 +4,7 @@ plugins{
 }
 
 dependencies {
-    implementation("org.bougainvillea.spring:eureka-client:${projectVersion}")
+    implementation("org.bougainvilleas.spring:eureka-client:${projectVersion}")
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.cloud:spring-cloud-config-server'
     implementation 'org.springframework.cloud:spring-cloud-starter-bus-amqp'
