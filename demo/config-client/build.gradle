@@ -6,10 +6,10 @@ ext {
     set('webName', 'undertow') // 'tomcat' 'jetty' 'undertow'
 }
 dependencies {
-    implementation("org.bougainvillea.spring:eureka-client:${projectVersion}")
-    implementation("org.bougainvillea.spring:spring-web:${webName}.${springBootVersion}")
-    api("org.springframework.cloud:spring-cloud-starter-config")
-
+    implementation("org.bougainvilleas.spring:eureka-client:${projectVersion}")
+    implementation("org.bougainvilleas.spring:spring-web:${webName}.${springBootVersion}")
+    implementation("org.springframework.cloud:spring-cloud-starter-config")
+    implementation("org.springframework.cloud:spring-cloud-starter-bootstrap")
 }
 dependencyManagement {
     imports {
