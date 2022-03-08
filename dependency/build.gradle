@@ -7,6 +7,7 @@ buildscript {
 
         set('springCloudVersion', "2021.0.1")
         set('springBootVersion', "2.6.4")
+        set('springdoc', "1.6.6")
         set('springManageVersion', "1.0.11.RELEASE")
 
     }
@@ -44,18 +45,12 @@ allprojects {
         mavenCentral()
     }
 
-    compileTestJava.enabled(true)
-    processTestResources.enabled(true)
-    testClasses.enabled(true)
-    jar.enabled(false)
-    test.enabled(false)
-
 }
 
 subprojects {
     apply plugin: 'java-library'
 
-    group = 'org.bougainvillea.spring'
+    group = 'org.bougainvilleas.spring'
     version = "${projectVersion}" as Object
 
 

@@ -4,7 +4,6 @@ plugins{
     id 'maven-publish'
 }
 
-jar.enabled(true)
 bootJar.enabled(false)
 
 dependencies {

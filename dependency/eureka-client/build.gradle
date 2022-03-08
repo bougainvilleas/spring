@@ -4,11 +4,10 @@ plugins{
     id 'maven-publish'
 }
 
-jar.enabled(true)
 bootJar.enabled(false)
 
 dependencies {
-    implementation("org.bougainvillea.spring:spring-depency:${projectVersion}")
+    implementation("org.bougainvilleas.spring:spring-depency:${projectVersion}")
     api 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 }
 dependencyManagement {
