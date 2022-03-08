@@ -1,8 +1,9 @@
 package org.bougainvilleas.spring.web;
 
+import io.swagger.v3.oas.models.ExternalDocumentation;
+import io.swagger.v3.oas.models.info.Info;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import springfox.documentation.service.Contact;
 
 /**
  * @author renqiankun
@@ -13,22 +14,9 @@ import springfox.documentation.service.Contact;
 public class SwaggerInfo
 {
     private boolean enable;
-    private String basePackage;
-    private String pathRegex;
-    private String title;
-    private String description;
-    private String version;
-    private String serviceUrl;
-    private String license;
-    private String licenseUrl;
-    private String name;
-    private String url;
-    private String email;
 
-    private Contact contact;
+    private Info info;
 
-    public Contact getContact()
-    {
-        return new Contact(name,url,email);
-    }
+    private ExternalDocumentation external;
+
 }

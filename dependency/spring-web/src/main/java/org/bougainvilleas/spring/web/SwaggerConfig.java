@@ -1,18 +1,12 @@
 package org.bougainvilleas.spring.web;
 
 
+import io.swagger.v3.oas.models.OpenAPI;
+import org.springdoc.core.GroupedOpenApi;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.Assert;
-import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.oas.annotations.EnableOpenApi;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.plugins.Docket;
-
-import java.util.Collections;
 
 /**
  * @author renqiankun
@@ -20,7 +14,6 @@ import java.util.Collections;
  */
 @Configuration
 @EnableConfigurationProperties(SwaggerInfo.class)
-@EnableOpenApi
 public class SwaggerConfig
 {
 
@@ -32,38 +25,19 @@ public class SwaggerConfig
         this.swaggerInfo = swaggerInfo;
     }
 
-    /**
-     * 单元测试使用
-     */
-    public String getBasePackage() {
-        return swaggerInfo.getBasePackage();
-    }
-
-    public SwaggerInfo getSwaggerInfo() {
-        return swaggerInfo;
+    @Bean
+    public GroupedOpenApi publicApi() {
+        return GroupedOpenApi.builder()
+                .group("default")
+                .packagesToScan("org.bougainvilleas.spring")
+                .build();
     }
 
     @Bean
-    public Docket api()
-    {
-        return new Docket(DocumentationType.OAS_30)
-                .select()
-                .apis(RequestHandlerSelectors.basePackage(swaggerInfo.getBasePackage()))
-                .paths(PathSelectors.regex(swaggerInfo.getPathRegex()).negate())
-                .build()
-                .apiInfo(apiInfo());
+    public OpenAPI springShopOpenAPI() {
+        return new OpenAPI()
+                .info(swaggerInfo.getInfo())
+                .externalDocs(swaggerInfo.getExternal());
     }
 
-    private ApiInfo apiInfo()
-    {
-        return new ApiInfo(
-                swaggerInfo.getTitle(),
-                swaggerInfo.getDescription(),
-                swaggerInfo.getVersion(),
-                swaggerInfo.getServiceUrl(),
-                swaggerInfo.getContact(),
-                swaggerInfo.getLicense(),
-                swaggerInfo.getLicenseUrl(),
-                Collections.emptyList());
-    }
 }
