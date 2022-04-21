@@ -1,7 +1,7 @@
 # springboot 热加载 定时任务 starter
 
-> 0.0.1 版本说明:\
-> org.springframework.boot `2.5.5` \
+> 0.0.3 版本说明:\
+> org.springframework.boot `2.6.4` \
 > io.spring.dependency-management `1.0.11.RELEASE` \
 > java --version `1.8`
 
