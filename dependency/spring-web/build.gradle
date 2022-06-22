@@ -1,14 +1,18 @@
-plugins {
+plugins{
+    id 'org.springframework.boot' apply false
     id 'io.spring.dependency-management'
-    id 'org.springframework.boot'
     id 'maven-publish'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
+    }
 }
 
 ext {
     set('webName', 'undertow') // 'tomcat' 'jetty' 'undertow'
 }
-
-bootJar.enabled(false)
 
 version "${webName}." + "${springBootVersion}"
 
