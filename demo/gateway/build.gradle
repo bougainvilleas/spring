@@ -1,7 +1,3 @@
-plugins {
-    id 'io.spring.dependency-management'
-    id 'org.springframework.boot'
-}
 dependencies {
     implementation("org.bougainvilleas.spring:spring-depency:${projectVersion}")
     implementation("org.bougainvilleas.spring:eureka-client:${projectVersion}")

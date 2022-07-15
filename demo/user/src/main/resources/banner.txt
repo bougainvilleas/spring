@@ -55,4 +55,5 @@ ${AnsiColor.BRIGHT_CYAN}
                                                     `
 
 ${AnsiColor.BRIGHT_GREEN}
-::: Project (name:${info.app.name},version:${info.app.version}) :::              Spring-Boot ${spring-boot.version}
+Spring-Boot ${spring-boot.version}
+${application.title} ${application.version}

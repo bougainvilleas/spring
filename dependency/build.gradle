@@ -22,9 +22,7 @@ allprojects {
     apply plugin: 'java'
 
     java {
-        toolchain {
-            languageVersion = JavaLanguageVersion.of(8)
-        }
+        sourceCompatibility = JavaVersion.VERSION_1_8
     }
 
     tasks.withType(JavaCompile) {

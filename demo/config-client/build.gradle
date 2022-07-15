@@ -1,7 +1,3 @@
-plugins{
-    id 'io.spring.dependency-management'
-    id 'org.springframework.boot'
-}
 ext {
     set('webName', 'undertow') // 'tomcat' 'jetty' 'undertow'
 }
